@@ -1,0 +1,50 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.stoper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 450px;
+  width: 100%;
+  margin: 30vh auto 0 auto;
+  font-size: 2rem;
+}
+
+.button {
+  padding: 0 1vw 0 1vw;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+
+#reset-all {
+  display: block;
+  background-color: red;
+  border-radius: 5px;
+  width: 150px;
+  text-align: center;
+  margin: 5vh auto;
+}
+
+.results {
+  align-self: flex-start;
+}
+
+.result {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+.result:first-child {
+  margin-top: 5vh;
+}

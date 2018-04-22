@@ -52,12 +52,14 @@ var Stopwatch = function (_React$Component) {
   }, {
     key: 'print',
     value: function print() {
-      this.display.innerText = this.format(this.times);
+      this.state.display.innerText = this.format(this.times);
     }
+    // po co tyle this?
+
   }, {
     key: 'format',
     value: function format(times) {
-      return pad0(times.minutes) + ':' + pad0(times.seconds) + ':' + pad0(Math.floor(times.miliseconds));
+      return this.pad0(this.state.times.minutes) + ':' + this.pad0(this.state.times.seconds) + ':' + this.pad0(Math.floor(this.state.times.miliseconds));
     }
   }, {
     key: 'pad0',
@@ -73,8 +75,8 @@ var Stopwatch = function (_React$Component) {
     value: function start() {
       var _this2 = this;
 
-      if (!this.running) {
-        this.running = true;
+      if (!this.state.running) {
+        this.state.running = true;
         this.watch = setInterval(function () {
           return _this2.step();
         }, 10);
@@ -83,27 +85,27 @@ var Stopwatch = function (_React$Component) {
   }, {
     key: 'step',
     value: function step() {
-      if (!this.running) return;
+      if (!this.state.running) return;
       this.calculate();
       this.print();
     }
   }, {
     key: 'calculate',
     value: function calculate() {
-      this.times.miliseconds += 1;
-      if (this.times.miliseconds >= 100) {
-        this.times.seconds += 1;
-        this.times.miliseconds = 0;
+      this.state.times.miliseconds += 1;
+      if (this.state.times.miliseconds >= 100) {
+        this.state.times.seconds += 1;
+        this.state.times.miliseconds = 0;
       }
-      if (this.times.seconds >= 60) {
-        this.times.minutes += 1;
-        this.times.seconds = 0;
+      if (this.state.times.seconds >= 60) {
+        this.state.times.minutes += 1;
+        this.state.times.seconds = 0;
       }
     }
   }, {
     key: 'stop',
     value: function stop() {
-      this.running = false;
+      this.state.running = false;
       clearInterval(this.watch);
     }
   }, {
@@ -113,7 +115,7 @@ var Stopwatch = function (_React$Component) {
       var resultItem = document.createElement('li');
       resultItem.className = 'result';
       resultsList.appendChild(resultItem);
-      resultItem.innerHTML = this.display.innerText;
+      resultItem.innerHTML = this.state.display.innerText;
       this.reset();
       this.start();
     }

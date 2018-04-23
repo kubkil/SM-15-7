@@ -26,6 +26,11 @@ var Stopwatch = function (_React$Component) {
       savedTimes: []
     };
     _this.start = _this.start.bind(_this);
+    _this.step = _this.step.bind(_this);
+    _this.stop = _this.stop.bind(_this);
+    _this.reset = _this.reset.bind(_this);
+    _this.resetAll = _this.resetAll.bind(_this);
+    _this.lap = _this.lap.bind(_this);
     return _this;
   }
 
@@ -40,9 +45,6 @@ var Stopwatch = function (_React$Component) {
         }
       });
     }
-
-    // po co tyle this?
-
   }, {
     key: 'format',
     value: function format(time) {
@@ -71,7 +73,6 @@ var Stopwatch = function (_React$Component) {
         return;
       }
       this.calculate();
-      this.format();
     }
   }, {
     key: 'calculate',
@@ -113,8 +114,9 @@ var Stopwatch = function (_React$Component) {
     key: 'resetAll',
     value: function resetAll() {
       this.reset();
-      var resetAllResultsList = document.querySelector('.results');
-      resetAllResultsList.innerHTML = '';
+      this.setState({
+        savedTimes: []
+      });
     }
   }, {
     key: 'render',
@@ -128,38 +130,28 @@ var Stopwatch = function (_React$Component) {
           'nav',
           { className: 'controls' },
           React.createElement(
-            'button',
-            { className: 'button', id: 'start', onClick: function onClick() {
-                return _this3.start;
-              } },
+            'a',
+            { className: 'button', id: 'start', onClick: this.start },
             'Start'
           ),
           React.createElement(
             'a',
-            { href: '#', className: 'button', id: 'stop', onClick: function onClick() {
-                return _this3.stop;
-              } },
+            { href: '#', className: 'button', id: 'stop', onClick: this.stop },
             'Stop'
           ),
           React.createElement(
             'a',
-            { href: '#', className: 'button', id: 'reset', onClick: function onClick() {
-                return _this3.reset;
-              } },
+            { href: '#', className: 'button', id: 'reset', onClick: this.reset },
             'Reset'
           ),
           React.createElement(
             'a',
-            { href: '#', className: 'button', id: 'lap', onClick: function onClick() {
-                return _this3.lap;
-              } },
+            { href: '#', className: 'button', id: 'lap', onClick: this.lap },
             'Lap'
           ),
           React.createElement(
             'a',
-            { href: '#', className: 'button', id: 'reset-all', onClick: function onClick() {
-                return _this3.resetAll;
-              } },
+            { href: '#', className: 'button', id: 'reset-all', onClick: this.resetAll },
             'Reset all'
           )
         ),

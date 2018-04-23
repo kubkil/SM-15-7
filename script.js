@@ -11,6 +11,11 @@ class Stopwatch extends React.Component {
       savedTimes: []
     };
     this.start = this.start.bind(this);
+    this.step = this.step.bind(this);
+    this.stop = this.stop.bind(this);
+    this.reset = this.reset.bind(this);
+    this.resetAll = this.resetAll.bind(this);
+    this.lap = this.lap.bind(this);
   }
 
   reset() {
@@ -23,7 +28,6 @@ class Stopwatch extends React.Component {
     });
   }
 
-  // po co tyle this?
   format(time) {
     return (`${pad0(time.minutes)}:${pad0(time.seconds)}:${pad0(Math.floor(time.miliseconds))}`);
   }
@@ -44,7 +48,6 @@ class Stopwatch extends React.Component {
       return;
     }
     this.calculate();
-    this.format();
   }
 
   calculate() {
@@ -82,19 +85,20 @@ class Stopwatch extends React.Component {
 
   resetAll() {
     this.reset();
-    const resetAllResultsList = document.querySelector('.results');
-    resetAllResultsList.innerHTML = '';
+    this.setState({
+      savedTimes: []
+    });
   }
 
   render() {
     return (
       <div className='stoper'>
         <nav className='controls'>
-          <button className='button' id='start' onClick={() => this.start}>Start</button>
-          <a href='#' className='button' id='stop' onClick={() => this.stop}>Stop</a>
-          <a href='#' className='button' id='reset' onClick={() => this.reset}>Reset</a>
-          <a href='#' className='button' id='lap' onClick={() => this.lap}>Lap</a>
-          <a href='#' className='button' id='reset-all' onClick={() => this.resetAll}>Reset all</a>
+          <a className='button' id='start' onClick={this.start}>Start</a>
+          <a href='#' className='button' id='stop' onClick={this.stop}>Stop</a>
+          <a href='#' className='button' id='reset' onClick={this.reset}>Reset</a>
+          <a href='#' className='button' id='lap' onClick={this.lap}>Lap</a>
+          <a href='#' className='button' id='reset-all' onClick={this.resetAll}>Reset all</a>
         </nav>
         <div className='stopwatch'>{this.format(this.state.times)}</div>
         <ul className='results'>
